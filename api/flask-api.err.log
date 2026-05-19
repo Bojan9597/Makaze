@@ -1,0 +1,153 @@
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5001
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 120-517-586
+127.0.0.1 - - [18/May/2026 20:27:11] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 20:27:11] "GET /health/db HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 20:27:24] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 20:27:24] "GET /health/db HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 20:27:35] "POST /api/auth/register HTTP/1.1" 201 -
+127.0.0.1 - - [18/May/2026 20:27:35] "POST /api/auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 20:28:57] "OPTIONS /api/auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 20:28:57] "POST /api/auth/login HTTP/1.1" 401 -
+127.0.0.1 - - [18/May/2026 20:29:21] "OPTIONS /api/auth/register HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 20:29:21] "POST /api/auth/register HTTP/1.1" 201 -
+ * Detected change in 'C:\\Users\\bojan\\Desktop\\Makaze\\api\\app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 120-517-586
+127.0.0.1 - - [18/May/2026 20:41:07] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 20:41:07] "GET /health/db HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 20:41:31] "POST /api/auth/register HTTP/1.1" 201 -
+127.0.0.1 - - [18/May/2026 20:41:31] "POST /api/salons/5cccc075-1e66-40dd-a44c-c43c514bb679/services HTTP/1.1" 201 -
+127.0.0.1 - - [18/May/2026 20:41:31] "POST /api/auth/register HTTP/1.1" 201 -
+127.0.0.1 - - [18/May/2026 20:41:31] "GET /api/salons/5cccc075-1e66-40dd-a44c-c43c514bb679/available-slots?serviceId=4b17403a-a57e-496a-bafd-43777fcf288c&date=2026-05-19 HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 20:41:31] "POST /api/reservations HTTP/1.1" 201 -
+127.0.0.1 - - [18/May/2026 20:41:31] "GET /api/salons/5cccc075-1e66-40dd-a44c-c43c514bb679/reservations?status=Pending HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 20:41:31] "POST /api/reservations/9fc54d53-a842-4d48-9cbf-4b6b8fd4f997/accept HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 20:51:20] "GET /health/db HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 20:51:58] "GET /health/db HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 20:58:08] "GET /health/db HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 20:59:38] "GET /health/db HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 22:16:26] "OPTIONS /api/auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 22:16:27] "POST /api/auth/login HTTP/1.1" 401 -
+127.0.0.1 - - [18/May/2026 22:16:37] "OPTIONS /api/auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 22:16:37] "POST /api/auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 22:16:37] "GET /api/salons HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 22:16:50] "GET /api/salons HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 22:17:02] "OPTIONS /api/reservations/my HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 22:17:02] "GET /api/reservations/my HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 22:17:11] "GET /api/salons HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 22:17:13] "GET /api/salons/5cccc075-1e66-40dd-a44c-c43c514bb679/services HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 22:17:13] "GET /api/salons/5cccc075-1e66-40dd-a44c-c43c514bb679/available-slots?serviceId=4b17403a-a57e-496a-bafd-43777fcf288c&date=2026-05-19 HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 22:17:17] "OPTIONS /api/reservations HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 22:17:17] "POST /api/reservations HTTP/1.1" 201 -
+127.0.0.1 - - [18/May/2026 22:17:39] "GET /api/salons HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 22:18:27] "OPTIONS /api/auth/register HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 22:18:28] "POST /api/auth/register HTTP/1.1" 201 -
+127.0.0.1 - - [18/May/2026 22:18:33] "GET /api/salons HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 22:18:41] "GET /api/salons/0e3fd93f-fc35-41c4-b442-f43d543b4d7f/services HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 22:18:53] "GET /api/salons/0e3fd93f-fc35-41c4-b442-f43d543b4d7f/services HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 22:18:58] "OPTIONS /api/salons/0e3fd93f-fc35-41c4-b442-f43d543b4d7f/services HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 22:18:58] "POST /api/salons/0e3fd93f-fc35-41c4-b442-f43d543b4d7f/services HTTP/1.1" 201 -
+127.0.0.1 - - [18/May/2026 22:18:59] "GET /api/salons/0e3fd93f-fc35-41c4-b442-f43d543b4d7f/services HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 22:19:05] "GET /api/salons HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:33:15] "GET /health/db HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:34:45] "GET /health/db HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:42:32] "OPTIONS /api/auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:42:32] "POST /api/auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:42:33] "GET /api/salons HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:43:43] "GET /api/salons HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:43:53] "GET /api/salons/5cccc075-1e66-40dd-a44c-c43c514bb679/services HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:43:53] "GET /api/salons/5cccc075-1e66-40dd-a44c-c43c514bb679/available-slots?serviceId=4b17403a-a57e-496a-bafd-43777fcf288c&date=2026-05-20 HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:43:55] "OPTIONS /api/reservations HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:43:55] "POST /api/reservations HTTP/1.1" 409 -
+127.0.0.1 - - [19/May/2026 09:44:00] "POST /api/reservations HTTP/1.1" 409 -
+127.0.0.1 - - [19/May/2026 09:44:04] "OPTIONS /api/reservations/my HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:44:04] "GET /api/reservations/my HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:44:12] "GET /api/salons HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:44:17] "OPTIONS /api/reservations/my HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:44:18] "GET /api/reservations/my HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:44:19] "OPTIONS /api/reservations/49094f33-9615-4d14-bed3-9685b5e3b96f/cancel HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:44:19] "POST /api/reservations/49094f33-9615-4d14-bed3-9685b5e3b96f/cancel HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:44:19] "GET /api/reservations/my HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:44:27] "OPTIONS /api/reservations/49094f33-9615-4d14-bed3-9685b5e3b96f/cancel HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:44:27] "POST /api/reservations/49094f33-9615-4d14-bed3-9685b5e3b96f/cancel HTTP/1.1" 400 -
+127.0.0.1 - - [19/May/2026 09:44:57] "GET /api/salons HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:46:33] "GET /api/salons HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:47:12] "OPTIONS /api/reservations/my HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:47:12] "GET /api/reservations/my HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:47:54] "GET /api/salons HTTP/1.1" 200 -
+ * Detected change in 'C:\\Users\\bojan\\Desktop\\Makaze\\api\\app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 120-517-586
+127.0.0.1 - - [19/May/2026 10:00:00] "GET /health/db HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:00:26] "GET /api/salons HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:00:26] "GET /api/salons HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:02:43] "GET /api/salons HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:02:43] "GET /health/db HTTP/1.1" 200 -
+ * Detected change in 'C:\\Users\\bojan\\Desktop\\Makaze\\api\\app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 120-517-586
+127.0.0.1 - - [19/May/2026 10:06:05] "GET /health/db HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:06:05] "GET /api/salons HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:10:25] "GET /health/db HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:11:53] "OPTIONS /api/auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:11:53] "POST /api/auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:11:54] "OPTIONS /api/favorites HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:11:54] "GET /api/salons HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:11:54] "GET /api/favorites HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:12:11] "GET /api/salons HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:13:42] "OPTIONS /api/reservations/my HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:13:42] "GET /api/reservations/my HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:13:57] "OPTIONS /api/favorites HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:13:58] "GET /api/favorites HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:13:58] "GET /api/salons HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:15:33] "GET /api/salons HTTP/1.1" 200 -
+ * Detected change in 'C:\\Users\\bojan\\Desktop\\Makaze\\api\\app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 120-517-586
+127.0.0.1 - - [19/May/2026 10:22:42] "GET /health/db HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:22:42] "GET /api/salons HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:27:17] "OPTIONS /api/auth/register HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:27:18] "POST /api/auth/register HTTP/1.1" 201 -
+127.0.0.1 - - [19/May/2026 10:27:18] "OPTIONS /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/reservations HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:27:18] "GET /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/reservations HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:27:22] "OPTIONS /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/reservations?status=Pending HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:27:22] "GET /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/reservations?status=Pending HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:27:23] "OPTIONS /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/reservations HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:27:24] "GET /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/reservations HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:27:31] "GET /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:27:38] "GET /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/images HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:28:25] "GET /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/services HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:28:26] "GET /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/working-hours HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:28:26] "GET /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/breaks HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:28:48] "OPTIONS /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/working-hours HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:28:48] "PUT /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/working-hours HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:28:54] "GET /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:28:57] "GET /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:29:05] "GET /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/images HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:29:15] "OPTIONS /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/reservations HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:29:15] "GET /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/reservations HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:29:39] "OPTIONS /api/auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:29:39] "POST /api/auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:29:39] "OPTIONS /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/reservations HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:29:39] "GET /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/reservations HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:29:43] "GET /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:29:46] "GET /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/services HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:29:50] "OPTIONS /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/services HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:29:50] "POST /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/services HTTP/1.1" 201 -
+127.0.0.1 - - [19/May/2026 10:29:50] "GET /api/salons/1eefa76b-92fc-46b2-b356-efc9406c533e/services HTTP/1.1" 200 -
+ * Detected change in 'C:\\Users\\bojan\\Desktop\\Makaze\\api\\app.py', reloading
+ * Restarting with stat
+Traceback (most recent call last):
+  File "C:\Users\bojan\Desktop\Makaze\api\app.py", line 1685, in <module>
+    app = create_app()
+  File "C:\Users\bojan\Desktop\Makaze\api\app.py", line 36, in create_app
+    ensure_upload_dirs()
+NameError: name 'ensure_upload_dirs' is not defined
