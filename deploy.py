@@ -32,7 +32,7 @@ import posixpath
 # ---------------------------------------------------------------------------
 SERVER_IP   = "76.13.140.158"
 SERVER_USER = "root"
-SERVER_PASS = "pass"   # ili postavi env var DEPLOY_PASS
+SERVER_PASS = "Pijanista123()"   # ili postavi env var DEPLOY_PASS
 
 REMOTE_BASE = "/var/www/makaze"
 SERVICE_NAME = "makaze-api"
@@ -132,8 +132,8 @@ def deploy_server():
 
     # -- system packages -----------------------------------------------------
     print("\n=== 4. System packages ===")
-    ssh_run(ssh, "apt-get update -qq")
-    ssh_run(ssh, "apt-get install -y -qq nginx python3 python3-pip python3-venv")
+    ssh_run(ssh, "apt-get update -qq", check=False)
+    ssh_run(ssh, "apt-get install -y -qq nginx python3 python3-pip python3-venv", check=False)
 
     # -- upload API ----------------------------------------------------------
     print("\n=== 5. Upload Flask API ===")

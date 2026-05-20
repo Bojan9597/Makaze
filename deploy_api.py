@@ -5,7 +5,7 @@ import time
 # Define server details
 SERVER_IP = "76.13.140.158"
 SERVER_USER = "root"
-SERVER_PASS = "pass"
+SERVER_PASS = "Pijanista123()"
 REMOTE_DIR = "/var/www/server_global"
 
 def deploy():

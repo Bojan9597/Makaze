@@ -2530,8 +2530,8 @@ class SalonCalendarScreen extends StatefulWidget {
 class _SalonCalendarScreenState extends State<SalonCalendarScreen> {
   late final AppApiClient _api = AppApiClient(widget.session);
   late Future<List<RequestInfo>> _reservationsFuture = _api.salonReservations();
-  String _calendarView = 'Dan';
   DateTime _selectedDate = DateTime.now();
+  DateTime _displayedMonth = DateTime(DateTime.now().year, DateTime.now().month);
 
   void _reload() {
     setState(() => _reservationsFuture = _api.salonReservations());
@@ -2573,14 +2573,7 @@ class _SalonCalendarScreenState extends State<SalonCalendarScreen> {
       if (start == null) return false;
       final local = start.toLocal();
       final day = DateTime(local.year, local.month, local.day);
-      return switch (_calendarView) {
-        'Dan' => day == selected,
-        'Sedmica' =>
-          !day.isBefore(selected) &&
-              day.isBefore(selected.add(const Duration(days: 7))),
-        'Mjesec' => day.year == selected.year && day.month == selected.month,
-        _ => true,
-      };
+      return day == selected;
     }).toList()..sort(
       (a, b) =>
           (a.start ?? DateTime(1900)).compareTo(b.start ?? DateTime(1900)),
@@ -2590,12 +2583,7 @@ class _SalonCalendarScreenState extends State<SalonCalendarScreen> {
   String get _periodTitle {
     final day = _selectedDate.day.toString().padLeft(2, '0');
     final month = _selectedDate.month.toString().padLeft(2, '0');
-    return switch (_calendarView) {
-      'Dan' => '$day.$month.',
-      'Sedmica' => 'Od $day.$month. narednih 7 dana',
-      'Mjesec' => '${_selectedDate.month}.${_selectedDate.year}.',
-      _ => '',
-    };
+    return '$day.$month.';
   }
 
   @override
@@ -2607,19 +2595,6 @@ class _SalonCalendarScreenState extends State<SalonCalendarScreen> {
           actionLabel: 'Osvjezi',
           onAction: _reload,
         ),
-        const SizedBox(height: 10),
-        SelectableFilterRow(
-          labels: const ['Dan', 'Sedmica', 'Mjesec'],
-          selected: _calendarView,
-          onSelected: (value) => setState(() => _calendarView = value),
-        ),
-        const SizedBox(height: 16),
-        CalendarDayStrip(
-          selectedDate: _selectedDate,
-          onSelected: (date) => setState(() => _selectedDate = date),
-        ),
-        const SizedBox(height: 18),
-        SectionHeader(title: _periodTitle),
         const SizedBox(height: 10),
         if (widget.session.salonId == null)
           const EmptyStateCard(
@@ -2644,31 +2619,195 @@ class _SalonCalendarScreenState extends State<SalonCalendarScreen> {
                   text: 'Ne mogu ucitati kalendar: ${snapshot.error}',
                 );
               }
-              final reservations = _visibleReservations(snapshot.data ?? []);
-              if (reservations.isEmpty) {
-                return EmptyStateCard(
-                  icon: Icons.event_busy_outlined,
-                  title: 'Nema rezervacija',
-                  message: 'Nema termina za odabrani period.',
-                );
-              }
+              final all = snapshot.data ?? [];
+              final visible = _visibleReservations(all);
               return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  for (final reservation in reservations) ...[
-                    SalonReservationCard(
-                      reservation: reservation,
-                      onComplete: reservation.status == 'Accepted'
-                          ? () => _complete(reservation)
-                          : null,
-                      onNoShow: reservation.status == 'Accepted'
-                          ? () => _noShow(reservation)
-                          : null,
+                  _MonthCalendarGrid(
+                    displayedMonth: _displayedMonth,
+                    selectedDate: _selectedDate,
+                    reservations: all,
+                    onDaySelected: (date) => setState(() {
+                      _selectedDate = date;
+                      _displayedMonth = DateTime(date.year, date.month);
+                    }),
+                    onPrevMonth: () => setState(() {
+                      _displayedMonth = DateTime(_displayedMonth.year, _displayedMonth.month - 1);
+                    }),
+                    onNextMonth: () => setState(() {
+                      _displayedMonth = DateTime(_displayedMonth.year, _displayedMonth.month + 1);
+                    }),
+                  ),
+                  const SizedBox(height: 18),
+                  SectionHeader(title: _periodTitle),
+                  const SizedBox(height: 10),
+                  if (visible.isEmpty)
+                    EmptyStateCard(
+                      icon: Icons.event_busy_outlined,
+                      title: 'Nema rezervacija',
+                      message: 'Nema termina za odabrani period.',
+                    )
+                  else
+                    Column(
+                      children: [
+                        for (final reservation in visible) ...[
+                          SalonReservationCard(
+                            reservation: reservation,
+                            onComplete: reservation.status == 'Accepted'
+                                ? () => _complete(reservation)
+                                : null,
+                            onNoShow: reservation.status == 'Accepted'
+                                ? () => _noShow(reservation)
+                                : null,
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                      ],
                     ),
-                    const SizedBox(height: 10),
-                  ],
                 ],
               );
             },
+          ),
+      ],
+    );
+  }
+}
+
+class _MonthCalendarGrid extends StatelessWidget {
+  const _MonthCalendarGrid({
+    required this.displayedMonth,
+    required this.selectedDate,
+    required this.reservations,
+    required this.onDaySelected,
+    required this.onPrevMonth,
+    required this.onNextMonth,
+  });
+
+  final DateTime displayedMonth;
+  final DateTime selectedDate;
+  final List<RequestInfo> reservations;
+  final ValueChanged<DateTime> onDaySelected;
+  final VoidCallback onPrevMonth;
+  final VoidCallback onNextMonth;
+
+  static const _weekLabels = ['Pon', 'Uto', 'Sri', 'Čet', 'Pet', 'Sub', 'Ned'];
+  static const _monthNames = [
+    'Januar', 'Februar', 'Mart', 'April', 'Maj', 'Juni',
+    'Juli', 'August', 'Septembar', 'Oktobar', 'Novembar', 'Decembar',
+  ];
+
+  Map<int, List<String>> _statusByDay() {
+    final map = <int, List<String>>{};
+    for (final r in reservations) {
+      if (r.start == null) continue;
+      final local = r.start!.toLocal();
+      if (local.year == displayedMonth.year && local.month == displayedMonth.month) {
+        map.putIfAbsent(local.day, () => []).add(r.status ?? '');
+      }
+    }
+    return map;
+  }
+
+  Color _dotColor(String status) => switch (status) {
+    'Accepted' => const Color(0xFF2D7D6F),
+    'Pending' => Colors.orange,
+    'Completed' => Colors.grey,
+    _ => Colors.grey,
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    final today = DateTime.now();
+    final daysInMonth = DateTime(displayedMonth.year, displayedMonth.month + 1, 0).day;
+    final firstWeekday = DateTime(displayedMonth.year, displayedMonth.month, 1).weekday;
+    final statusByDay = _statusByDay();
+    final rows = ((firstWeekday - 1 + daysInMonth) / 7).ceil();
+
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(onPressed: onPrevMonth, icon: const Icon(Icons.chevron_left)),
+            Text(
+              '${_monthNames[displayedMonth.month - 1]} ${displayedMonth.year}',
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+            ),
+            IconButton(onPressed: onNextMonth, icon: const Icon(Icons.chevron_right)),
+          ],
+        ),
+        Row(
+          children: [
+            for (final label in _weekLabels)
+              Expanded(
+                child: Center(
+                  child: Text(
+                    label,
+                    style: TextStyle(fontSize: 11, color: Colors.grey[600], fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ),
+          ],
+        ),
+        const SizedBox(height: 4),
+        for (int row = 0; row < rows; row++)
+          Row(
+            children: List.generate(7, (col) {
+              final dayNum = row * 7 + col - (firstWeekday - 1) + 1;
+              if (dayNum < 1 || dayNum > daysInMonth) return const Expanded(child: SizedBox(height: 54));
+              final date = DateTime(displayedMonth.year, displayedMonth.month, dayNum);
+              final isToday = date.year == today.year && date.month == today.month && date.day == today.day;
+              final isSelected = date.year == selectedDate.year && date.month == selectedDate.month && date.day == selectedDate.day;
+              final statuses = statusByDay[dayNum] ?? [];
+              return Expanded(
+                child: GestureDetector(
+                  onTap: () => onDaySelected(date),
+                  child: Container(
+                    height: 54,
+                    margin: const EdgeInsets.all(2),
+                    decoration: BoxDecoration(
+                      color: isSelected
+                          ? const Color(0xFF2D7D6F)
+                          : isToday
+                              ? const Color(0xFF2D7D6F).withOpacity(0.12)
+                              : null,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '$dayNum',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: isToday || isSelected ? FontWeight.bold : FontWeight.normal,
+                            color: isSelected ? Colors.white : isToday ? const Color(0xFF2D7D6F) : Colors.black87,
+                          ),
+                        ),
+                        if (statuses.isNotEmpty) ...[
+                          const SizedBox(height: 3),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              for (final s in statuses.take(3))
+                                Container(
+                                  width: 5, height: 5,
+                                  margin: const EdgeInsets.symmetric(horizontal: 1),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: isSelected ? Colors.white70 : _dotColor(s),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }),
           ),
       ],
     );
